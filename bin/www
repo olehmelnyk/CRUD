@@ -19,12 +19,13 @@ switch(args.length){
   case 0:
     break;
   case 1:
-    var argPort = +args[0];
   case 2:
+    var argPort = args[0];
     var argHost = args[1];
     break;
   default:
     console.error(`Too many params passed: ${args}, expected first parameter to be port and second parameter to be host`);
+    process.exit(1);
 }
 
 /**
@@ -112,6 +113,8 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
+// to make this work you need to set your local env: DEBUG=CRUD:*
+// or just change debug to console.log
 function onListening() {
   //const addr = server.address();
   //let bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
