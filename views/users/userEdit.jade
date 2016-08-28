@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  ol.breadcrumb
+    li
+      a(href="/") Home
+    li
+      a(href="/users") Users
+    li.active= user.firstName+" "+user.lastName
+
+  .col-md-6.col-md-offset-3
+    .panel.panel-default
+      .panel-heading Edit User
+      .panel-body
+        form#updateUser(method="POST" action="/users/"+uid+"/edit")
+          div#uid
+            input(type="hidden" name="id" value=uid)
+            .form-group
+              label(for="firstName") First Name
+              input.form-control#firstName(type="text" name="firstName" value=user.firstName autocomplete="off" required)
+            .form-group
+              label(for="lastName") Last Name
+              input.form-control#lastName(type="text" name="lastName" value=user.lastName autocomplete="off" required)
+            .form-group
+              button.btn.btn-primary(type="submit") Save
+              button.btn.btn-default.pull-right#cancel(type="button") Cancel

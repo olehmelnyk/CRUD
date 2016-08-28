@@ -3,6 +3,9 @@
 let addUser = $('#addUser');
 let updateUser = $('#updateUser');
 let deleteUser = $('.deleteUser');
+let cancel = $('#cancel');
+
+cancel.on('click', () => {window.history.back();});
 
 function getFormData(form){
     return form.serializeArray().reduce((obj, item) => {
@@ -17,9 +20,14 @@ addUser.on('submit', e => {
         url: '/users',
         method: 'POST',
         data: getFormData(addUser),
-        success: (data) => { if(data.status === 'ok') window.location = '/users'}
+        success: (data) => {
+            if(data.status === 'ok'){
+                window.location = '/users';
+            }else{
+                alert('Error')
+            }
+        }
     });
-    //window.location = '/users';
 });
 
 updateUser.on('submit', e => {
@@ -29,7 +37,13 @@ updateUser.on('submit', e => {
         url: `/users/${data['id'].value}`,
         method: 'PUT',
         data: data,
-        success: (data) => { if(data.status === 'ok') window.location = '/users'}
+        success: (data) => {
+            if(data.status === 'ok'){
+                window.location = '/users';
+            }else{
+                alert('Error')
+            }
+        }
     });
 });
 
@@ -42,7 +56,13 @@ deleteUser.each((i, delBtn) => {
                 url: `/users/${uid}`,
                 method: 'DELETE',
                 data: uid,
-                success: (data) => { if(data.status === 'ok') window.location = '/users'}
+                success: (data) => {
+                    if(data.status === 'ok'){
+                        window.location = '/users';
+                    }else{
+                        alert('Error')
+                    }
+                }
             });
         }
     });

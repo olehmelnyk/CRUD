@@ -8,15 +8,17 @@ block content
       a(href="/users") Users
     li.active New User
 
-  .panel.panel-primary
-    .panel-heading New User
-    .panel-body
-      form#addUser(method="POST" action="/users/add")
-        .form-group
-          label First Name
-            input.form-control(type="text" name="firstName" value="" placeholder="Fist Name" autocomplete="off")
-        .form-group
-          label Last Name
-            input.form-control(type="text" name="lastName" value="" placeholder="Last Name" autocomplete="off")
-        .form-group
-          button.btn.btn-default(type="submit" title="Add New User") Add
+  .col-md-6.col-md-offset-3
+    .panel.panel-default
+      .panel-heading New User
+      .panel-body
+        form#addUser(method="POST" action="/users/add")
+          .form-group
+            label(for="firstName") First Name
+            input.form-control#firstName(type="text" name="firstName" value="" placeholder="Fist Name" autocomplete="off" required)
+          .form-group
+            label(for="lastName") Last Name
+            input.form-control#lastName(type="text" name="lastName" value="" placeholder="Last Name" autocomplete="off" required)
+          .form-group
+            button.btn.btn-primary(type="submit") Add
+            button.btn.btn-default.pull-right#cancel(type="button") Cancel

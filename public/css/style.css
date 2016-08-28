@@ -9,9 +9,9 @@ main{
   flex: 1;
 }
 
-footer{
-  background-color: #ebebeb;
-  border-top: 1px solid #dadada;
+footer {
+  background-color: #1c1e22;
+  border-top: 1px solid #0c0d0e;
   min-height: 50px;
   padding-top: 10px;
 }

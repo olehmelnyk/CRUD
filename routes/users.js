@@ -7,17 +7,17 @@ const db = require('../models/db');
 
 /*
   Route map:
-  method    url                 action
-  get       /users              show all users
-  get       /users/:id          show user by id
+  method    url               action
+  get       /users            show all users
+  get       /users/:id        show user by id
 
-  get       /users/add          show form for adding new user
-  post      /users              create new user (send post request via AJAX and redirect to /users)
+  get       /users/add        show form for adding new user
+  post      /users            create new user (send post request via AJAX and redirect to /users)
 
-  get       /users/update/:id   show form for updating user by id
-  put       /users/:id          update user info by user id (send put request via AJAX and redirect to /users)
+  get       /users/:id/edit   show form for updating user by id
+  put       /users/:id        update user info by user id (send put request via AJAX and redirect to /users)
 
-  delete    /users/:id          delete user by id (confirm, then send delete request via AJAX and redirect to /users)
+  delete    /users/:id        delete user by id (confirm, then send delete request via AJAX and redirect to /users)
 */
 
 // delete user (ajax)
@@ -27,7 +27,7 @@ router.delete('/users/:id', (req, res) => {
 });
 
 // update user info (form)
-router.get('/users/update/:id', (req, res) => {
+router.get('/users/:id/edit', (req, res) => {
   let uid = +req.params.id;
   let user = db.getUserByID(uid);
   let data = {
@@ -35,7 +35,7 @@ router.get('/users/update/:id', (req, res) => {
     uid: uid,
     user: user
   };
-  res.render('./users/userUpdate', data);
+  res.render('./users/userEdit', data);
 });
 
 // update user info (ajax)

@@ -18,6 +18,6 @@ block content
       td= user.firstName
       td= user.lastName
       td
-        a.btn.btn-primary.glyphicon.glyphicon-pencil(href="/users/update/"+user.id title="Edit User")
+        a.btn.btn-primary.glyphicon.glyphicon-pencil(href="/users/"+user.id+"/edit" title="Edit User")
       td
-        a.deleteUser.btn.btn-danger.glyphicon.glyphicon-trash(href="/users/delete/"+user.id data-uid=user.id title="Delete User")
+        a.deleteUser.btn.btn-danger.glyphicon.glyphicon-trash(href="/users/"+user.id+"/delete" data-uid=user.id title="Delete User")
