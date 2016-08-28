@@ -83,4 +83,26 @@ router.get('/', (req, res) => {
   res.redirect('/users');
 });
 
+/*-------------------------------
+  Sync routes to work w/o AJAX
+ ------------------------------*/
+
+// create new user (sync)
+router.post('/users/add', (req, res) => {
+  db.addNewUser(req.body);
+  res.redirect('/users');
+});
+
+// update user info (sync)
+router.post('/users/:id/edit', (req, res) => {
+  db.updateUser(req.body);
+  res.redirect('/users');
+});
+
+// delete user (sync)
+router.get('/users/:id/delete', (req, res) => {
+  db.deleteUser(+req.params.id);
+  res.redirect('/users');
+});
+
 module.exports = router;
