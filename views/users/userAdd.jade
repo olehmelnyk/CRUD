@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  ol.breadcrumb
+    li
+      a(href="/") Home
+    li
+      a(href="/users") Users
+    li.active New User
+
+  .panel.panel-primary
+    .panel-heading New User
+    .panel-body
+      form#addUser(method="POST" action="/users/add")
+        .form-group
+          label First Name
+            input.form-control(type="text" name="firstName" value="" placeholder="Fist Name" autocomplete="off")
+        .form-group
+          label Last Name
+            input.form-control(type="text" name="lastName" value="" placeholder="Last Name" autocomplete="off")
+        .form-group
+          button.btn.btn-default(type="submit" title="Add New User") Add

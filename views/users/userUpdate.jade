@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  ol.breadcrumb
+    li
+      a(href="/") Home
+    li
+      a(href="/users") Users
+    li.active= user.firstName+" "+user.lastName
+
+  .panel.panel-primary
+    .panel-heading Edit User
+    .panel-body
+      form#updateUser(method="POST" action="/users/update/"+uid)
+        div#uid
+          input(type="hidden" name="id" value=uid)
+          .form-group
+            label First Name
+              input.form-control(type="text" name="firstName" value=user.firstName)
+          .form-group
+            label Last Name
+              input.form-control(type="text" name="lastName" value=user.lastName)
+          .form-group
+            button.btn.btn-default(type="submit" title="Update User Info") Update
