@@ -7,15 +7,44 @@
  */
 
 const app = require('../app');
-const debug = require('debug')('CRUD2:server');
+const debug = require('debug')('CRUD:server');
 const http = require('http');
+
+/**
+ * Get port and host from console
+ */
+
+const args = process.argv.slice(2);
+switch(args.length){
+  case 0:
+    break;
+  case 1:
+    var argPort = +args[0];
+  case 2:
+    var argHost = args[1];
+    break;
+  default:
+    console.error(`Too many params passed: ${args}, expected first parameter to be port and second parameter to be host`);
+}
+
+/**
+ * Get host from console args, local env or use localhost as default
+ */
+
+const host = filterHosts([argHost, process.env.HOST, 'localhost']);
+
+function filterHosts(hosts){
+  for(let i = 0; i < hosts.length; i++){
+    if(hosts[i]) return hosts[i];
+  }
+}
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+const port = normalizePort(argPort || process.env.PORT || 3000);
+app.set('port');
 
 /**
  * Create HTTP server.
@@ -27,7 +56,7 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, host);
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -84,9 +113,7 @@ function onError(error) {
  */
 
 function onListening() {
-  let addr = server.address();
-  let bind = typeof addr === 'string'
-    ? `pipe ${addr}`
-    : `port ${addr.port}`;
-  debug(`Listening on ${bind}`);
+  //const addr = server.address();
+  //let bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  debug(`Listening on ${host}:${port}`);
 }

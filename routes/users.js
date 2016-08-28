@@ -86,7 +86,7 @@ router.get('/', (req, res) => {
 /*-------------------------------
   Sync routes to work w/o AJAX
  ------------------------------*/
-
+/*
 // create new user (sync)
 router.post('/users/add', (req, res) => {
   db.addNewUser(req.body);
@@ -104,5 +104,6 @@ router.get('/users/:id/delete', (req, res) => {
   db.deleteUser(+req.params.id);
   res.redirect('/users');
 });
+*/
 
 module.exports = router;
