@@ -40,7 +40,7 @@ updateUser.on('submit', e => {
 deleteUser.each((i, delBtn) => {
     delBtn.addEventListener('click', e => {
         e.preventDefault();
-        let uid = +delBtn.getAttribute('data-uid');
+        let uid = delBtn.getAttribute('data-uid');
         if(confirm('Are you sure you want to delete this user?')){
             $.ajax({
                 url: `/users/${uid}`,

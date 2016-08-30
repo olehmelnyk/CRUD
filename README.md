@@ -12,9 +12,9 @@ Install and start server
     $ git clone https://github.com/olehmelnyk/CRUD.git
     $ cd CRUD
     $ npm i
-    $ node ./bin/www
+    $ npm start
 
-Now you can open localhost:3000 in your favorite browser and test this app.
+Now you can open http://localhost:3000 in your favorite browser and test this app.
 
 You can start server with custom host and port like this:
 -----------------------------------------------------------

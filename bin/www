@@ -35,7 +35,7 @@ function onError(error){
     throw error;
   }
 
-  let bind = typeof port === 'string'
+  let bind = typeof config.port === 'string'
     ? `Pipe ${config.port}`
     : `Port ${config.port}`;
 
@@ -58,14 +58,9 @@ function onError(error){
  * Event listener for HTTP server "listening" event.
  */
 
-// to make this work you need to set your local env: DEBUG=CRUD:*
-// or just change debug to console.log
 function onListening(){
   //const addr = server.address();
   //let bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  if(process.env.DEBUG){
-    debug(`Listening on ${config.host}:${config.port}`);
-  }else{
-    console.log(`Listening on ${config.host}:${config.port}`);
-  }
+  let msg = `Listening on ${config.host}:${config.port}`;
+  process.env.DEBUG ? debug(msg) : console.log(msg);
 }

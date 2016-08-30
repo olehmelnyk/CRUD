@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 
-const db = require('../models/db');
+//const db = require('../models/db');
+const User = require('../models/users');
 
 /*
   Route map:
@@ -22,26 +23,40 @@ const db = require('../models/db');
 
 // delete user (ajax)
 router.delete('/users/:id', (req, res) => {
-  db.deleteUser(+req.params.id);
-  res.send({status: 'ok'});
+  let id = req.params.id;
+  console.log(id);
+  User.findByIdAndRemove(id, err => {
+    if (err) res.send({status: `error: ${err}`});
+    res.send({status: 'ok'});
+  });
 });
 
 // update user info (form)
 router.get('/users/:id/edit', (req, res) => {
-  let uid = +req.params.id;
-  let user = db.getUserByID(uid);
-  let data = {
-    title: `Edit User | ${user.firstName} ${user.lastName}`,
-    uid: uid,
-    user: user
-  };
-  res.render('./users/userEdit', data);
+  let id = req.params.id;
+  User.find({_id: id}, (err, user) => {
+    if (err) res.send({status: `error: ${err}`});
+    let data = {
+      title: `Edit User | ${user[0].firstName} ${user[0].lastName}`,
+      uid: id,
+      user: user[0]
+    };
+    res.render('./users/userEdit', data);
+  });
 });
 
 // update user info (ajax)
 router.put('/users/:id', (req, res) => {
-  db.updateUser(req.body);
-  res.send({status: 'ok'});
+  let data = req.body;
+  let user = {
+    firstName: data.firstName,
+    lastName: data.lastName
+  };
+  User.findByIdAndUpdate(data.id, user, (err, user) => {
+    if (err) res.send({status: `error: ${err}`});
+    // console.log(`Updated user data: ${user}`);
+    res.send({status: 'ok'});
+  });
 });
 
 // add new user (form)
@@ -54,28 +69,40 @@ router.get('/users/add', (req, res) => {
 
 // create new user (ajax)
 router.post('/users', (req, res) => {
-  db.addNewUser(req.body);
+  let newUser = new User(req.body);
+  newUser.save((err) => {
+    if (!err) {
+      // console.log(`User ${newUser} saved successfully!`);
+    } else {
+      res.send({status: `error: ${err}`});
+    }
+  });
   res.send({status: 'ok'});
 });
 
 // user by id (table)
 router.get('/users/:id', (req, res) => {
-  let uid = +req.params.id;
-  let user = db.getUserByID(uid);
-  let data = {
-    title: `${user.firstName} ${user.lastName}`,
-    user: user
-  };
-  res.render('./users/user', data);
+  let id = req.params.id;
+  User.find({_id: id}, (err, user) => {
+    if (err) res.send({status: `error: ${err}`});
+    let data = {
+      title: `${user.firstName} ${user.lastName}`,
+      user: user[0]
+    };
+    res.render('./users/user', data);
+  });
 });
 
 // all users (table)
 router.get('/users', (req, res) => {
-  let data = {
-    title: "Users",
-    users: db.read
-  };
-  res.render('./users/users', data);
+  User.find({}, (err, users) => {
+    if (err) res.send({status: `error: ${err}`});
+    let data = {
+      title: "Users",
+      users: users
+    };
+    res.render('./users/users', data);
+  });
 });
 
 // force redirect to avoid confusion at this stage, since home page is missing...

@@ -9,17 +9,16 @@ exports.args = process.argv.slice(2);
 /**
  * Get port and host from console args
  */
+
+let argPort, argHost;
 if(this.args.length){
     if(this.args.length > 2){
         console.error(`Too many params passed: ${this.args}, expected first parameter to be port and second parameter to be host`);
         process.exit(1);
     }
 
-    var argPort = this.args[0];
-
-    if(this.args.length > 1){
-        var argHost = this.args[1];
-    }
+    argPort = this.args[0];
+    argHost = this.args[1];
 }
 
 /**
@@ -59,3 +58,11 @@ function normalizePort(val){
 
     return false;
 }
+
+/**
+ * MongoDB connection params
+ * @type {any}
+ */
+
+exports.DB_HOST = process.env.MONGO_DB_HOST || 'localhost';
+exports.DB_NAME = process.env.MONGO_DB_NAME || 'crud';
