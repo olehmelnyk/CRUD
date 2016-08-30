@@ -6,21 +6,24 @@ block content
       a(href="/") Home
     li.active Users
 
-  table.table.table-striped.table-hover
-    tr
-      th First Name
-      th Last Name
-      th Show
-      th Edit
-      th Delete
-    each user in users
+  if users[0]
+    table.table.table-striped.table-hover
       tr
-        td=user.firstName
-        td=user.lastName
-        td
-          a.btn.btn-default.glyphicon.glyphicon-eye-open(href="/users/"+user.id title="Show User")
-        td
-          a.btn.btn-primary.glyphicon.glyphicon-pencil(href="/users/"+user.id+"/edit" title="Edit User")
-        td
-          a.deleteUser.btn.btn-danger.glyphicon.glyphicon-trash(href="/users/"+user.id+"/delete" data-uid=user.id title="Delete User")
+        th First Name
+        th Last Name
+        th Show
+        th Edit
+        th Delete
+      each user in users
+        tr
+          td=user.firstName
+          td=user.lastName
+          td
+            a.btn.btn-default.glyphicon.glyphicon-eye-open(href="/users/"+user.id title="Show User")
+          td
+            a.btn.btn-primary.glyphicon.glyphicon-pencil(href="/users/"+user.id+"/edit" title="Edit User")
+          td
+            a.deleteUser.btn.btn-danger.glyphicon.glyphicon-trash(href="/users/"+user.id+"/delete" data-uid=user.id title="Delete User")
+  else
+    p.well.well-lg Add some users to show them here!
   a.btn.btn-default.btn-lg.btn-block.glyphicon.glyphicon-plus(href="/users/add" title="Add New User")
