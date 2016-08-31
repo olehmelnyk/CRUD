@@ -3,9 +3,6 @@
 const express = require('express');
 const router = express.Router();
 
-//const db = require('../models/db');
-const User = require('../models/users');
-
 /*
   Route map:
   method    url               action
@@ -23,8 +20,7 @@ const User = require('../models/users');
 
 // delete user (ajax)
 router.delete('/users/:id', (req, res) => {
-  let id = req.params.id;
-  console.log(id);
+  const id = req.params.id;
   User.findByIdAndRemove(id, err => {
     if (err) res.send({status: `error: ${err}`});
     res.send({status: 'ok'});
@@ -33,7 +29,7 @@ router.delete('/users/:id', (req, res) => {
 
 // update user info (form)
 router.get('/users/:id/edit', (req, res) => {
-  let id = req.params.id;
+  const id = req.params.id;
   User.find({_id: id}, (err, user) => {
     if (err) res.send({status: `error: ${err}`});
     let data = {
@@ -47,8 +43,8 @@ router.get('/users/:id/edit', (req, res) => {
 
 // update user info (ajax)
 router.put('/users/:id', (req, res) => {
-  let data = req.body;
-  let user = {
+  const data = req.body;
+  const user = {
     firstName: data.firstName,
     lastName: data.lastName
   };
@@ -61,7 +57,7 @@ router.put('/users/:id', (req, res) => {
 
 // add new user (form)
 router.get('/users/add', (req, res) => {
-  let data = {
+  const data = {
     title: "New User"
   };
   res.render('./users/userAdd', data);
@@ -69,7 +65,7 @@ router.get('/users/add', (req, res) => {
 
 // create new user (ajax)
 router.post('/users', (req, res) => {
-  let newUser = new User(req.body);
+  const newUser = new User(req.body);
   newUser.save((err) => {
     if (!err) {
       // console.log(`User ${newUser} saved successfully!`);
@@ -82,10 +78,10 @@ router.post('/users', (req, res) => {
 
 // user by id (table)
 router.get('/users/:id', (req, res) => {
-  let id = req.params.id;
+  const id = req.params.id;
   User.find({_id: id}, (err, user) => {
     if (err) res.send({status: `error: ${err}`});
-    let data = {
+    const data = {
       title: `${user.firstName} ${user.lastName}`,
       user: user[0]
     };
@@ -95,9 +91,9 @@ router.get('/users/:id', (req, res) => {
 
 // all users (table)
 router.get('/users', (req, res) => {
-  User.find({}, (err, users) => {
+    User.find({}, (err, users) => {
     if (err) res.send({status: `error: ${err}`});
-    let data = {
+    const data = {
       title: "Users",
       users: users
     };

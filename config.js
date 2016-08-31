@@ -1,6 +1,12 @@
 'use strict';
 
 /**
+ * Project root folder path
+ * @type {String}
+ */
+exports.ROOT_FOLDER = __dirname;
+
+/**
  * Read console args params
  */
 
@@ -60,9 +66,23 @@ function normalizePort(val){
 }
 
 /**
+ * Choose which DB to use: JSON File or MongoDB
+ * @type {string}
+ */
+exports.DB_TYPE = process.env.DB_TYPE || 'MONGODB';
+
+exports.JSON_DB_FILE = './data.json';
+
+/**
  * MongoDB connection params
- * @type {any}
+ * @type {Object}
  */
 
-exports.DB_HOST = process.env.MONGO_DB_HOST || 'localhost';
-exports.DB_NAME = process.env.MONGO_DB_NAME || 'crud';
+exports.MONGO = {
+    DB_HOST: process.env.MONGO_DB_HOST || 'localhost',
+    DB_PORT: process.env.MONGO_DB_PORT || 27017,
+    DB_NAME: process.env.MONGO_DB_NAME || 'crud',
+    DB_USER: process.env.MONGO_DB_USER || 'root',
+    DB_PASS: process.env.MONGO_DB_PASS || '',
+    DB_OPTIONS: process.env.MONGO_DB_OPTIONS || ''
+};
