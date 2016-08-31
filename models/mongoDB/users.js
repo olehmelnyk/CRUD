@@ -16,16 +16,15 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
-const getAllUsers = new Promise((resolve, reject) => {
-    User.find({}, (error, data) => {
-        error
-            ? reject(error)
-            : resolve(data);
+const getAllUsers = () => {
+    return new Promise((resolve, reject) => {
+        User.find((error, data) => {
+            error
+                ? reject(error)
+                : resolve(data);
+        });
     });
-});
-
-//test
-//getAllUsers.then(data => console.log(data), error => console.log(error));
+};
 
 const getUserByID = id => {
     return new Promise((resolve, reject) => {
@@ -37,9 +36,6 @@ const getUserByID = id => {
     });
 };
 
-//test
-//getUserByID('57c5d212e8bd5b7437597490').then(user => console.log(user), error => console.log(error));
-
 const addUser = data => {
     return new Promise((resolve, reject) => {
         new User(data).save((error, data) => {
@@ -49,10 +45,6 @@ const addUser = data => {
         });
     });
 };
-
-//test
-//addUser({firstName: 'John', lastName: 'Doe'}).then(data => console.log(data), error => console.log(error));
-//getAllUsers.then(newUser => console.log(newUser), error => console.log(error));
 
 const editUser = user => {
     return new Promise((resolve, reject) => {
@@ -64,9 +56,6 @@ const editUser = user => {
     });
 };
 
-//editUser('57c687f34a9710c41630aa0c', {firstName: 'John', lastName: 'Smith'}).then(data => console.log(data), error => console.log(error));
-//getAllUsers.then(editedUser => console.log(editedUser), error => console.log(error));
-
 const deleteUser = id => {
     return new Promise((resolve, reject) => {
         User.findByIdAndRemove(id, (error, data) => {
@@ -76,11 +65,6 @@ const deleteUser = id => {
         });
     });
 };
-
-//deleteUser('57c705512073915c042ef779').then(data => console.log(data), error => console.log(error));
-//getAllUsers.then(deletedUser => console.log(deletedUser), error => console.log(error));
-
-//module.exports = User;
 
 exports.getAllUsers = getAllUsers;
 exports.getUserByID = getUserByID;

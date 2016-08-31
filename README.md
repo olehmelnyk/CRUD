@@ -14,7 +14,7 @@ Install and start server
     $ npm i
     $ npm start
 
-Now you can open http://localhost:3000 in your favorite browser and test this app.
+Now you can open [http://localhost:3000](http://localhost:3000) in your favorite browser and test this app.
 
 You can start server with custom host and port like this:
 -----------------------------------------------------------

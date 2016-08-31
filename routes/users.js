@@ -91,7 +91,7 @@ router.get('/users/:id', (req, res) => {
 
 // get all users (table) +
 router.get('/users', (req, res) => {
-    DB.getAllUsers.then(
+    DB.getAllUsers().then(
         users => {
             const data = {
                 title: "Users",
