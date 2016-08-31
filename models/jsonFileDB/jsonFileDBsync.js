@@ -16,6 +16,9 @@ exports.getUserByID = uid => this.getAllUsers.find(user => user.id === uid);
 
 exports.addUser = data => {
     const users = this.getAllUsers;
+    // TODO: find better algorithm to generate UID,
+    // for example, create other db obj with settings,
+    // and store UID there, increment on each userAdd action
     const uid = users.slice(-1)[0].id +1;
     users.push({
         id: uid,

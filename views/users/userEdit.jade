@@ -12,9 +12,9 @@ block content
     .panel.panel-default
       .panel-heading Edit User
       .panel-body
-        form#updateUser(method="POST" action="/users/"+uid+"/edit")
-          div#uid
-            input(type="hidden" name="id" value=uid)
+        form#updateUser(method="POST" action="/users/"+user.id+"/edit")
+          div#user.id
+            input(type="hidden" name="id" value=user.id)
             .form-group
               label(for="firstName") First Name
               input.form-control#firstName(type="text" name="firstName" value=user.firstName autocomplete="off" autofocus required)

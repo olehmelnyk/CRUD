@@ -3,130 +3,141 @@
 const express = require('express');
 const router = express.Router();
 
+const DB = require('../controllers/dbDriver').DB;
+
 /*
-  Route map:
-  method    url               action
-  get       /users            show all users
-  get       /users/:id        show user by id
+ Route map:
+ method    url               action
+ get       /users            show all users
+ get       /users/:id        show user by id
 
-  get       /users/add        show form for adding new user
-  post      /users            create new user (send post request via AJAX and redirect to /users)
+ get       /users/add        show form for adding new user
+ post      /users            create new user (send post request via AJAX and redirect to /users)
 
-  get       /users/:id/edit   show form for updating user by id
-  put       /users/:id        update user info by user id (send put request via AJAX and redirect to /users)
+ get       /users/:id/edit   show form for updating user by id
+ put       /users/:id        update user info by user id (send put request via AJAX and redirect to /users)
 
-  delete    /users/:id        delete user by id (confirm, then send delete request via AJAX and redirect to /users)
-*/
+ delete    /users/:id        delete user by id (confirm, then send delete request via AJAX and redirect to /users)
+ */
 
-// delete user (ajax)
+// delete user (ajax) +
 router.delete('/users/:id', (req, res) => {
-  const id = req.params.id;
-  User.findByIdAndRemove(id, err => {
-    if (err) res.send({status: `error: ${err}`});
-    res.send({status: 'ok'});
-  });
+    DB.deleteUser(req.params.id).then(
+        done => res.send({status: 'ok', msg: done}),
+        error => res.send({status: `error: ${error}`})
+    );
 });
 
-// update user info (form)
+// edit user (form) +
 router.get('/users/:id/edit', (req, res) => {
-  const id = req.params.id;
-  User.find({_id: id}, (err, user) => {
-    if (err) res.send({status: `error: ${err}`});
-    let data = {
-      title: `Edit User | ${user[0].firstName} ${user[0].lastName}`,
-      uid: id,
-      user: user[0]
-    };
-    res.render('./users/userEdit', data);
-  });
+    DB.getUserByID(req.params.id).then(
+        user => {
+            const data = {
+                title: `Edit User | ${user.firstName} ${user.lastName}`,
+                user: user
+            };
+            if (req.query.format === 'json') {
+                res.send(data);
+            } else {
+                res.render('./users/userEdit', data);
+            }
+        },
+        error => res.send({status: `error: ${error}`})
+    );
 });
 
-// update user info (ajax)
+// edit user (ajax) +
 router.put('/users/:id', (req, res) => {
-  const data = req.body;
-  const user = {
-    firstName: data.firstName,
-    lastName: data.lastName
-  };
-  User.findByIdAndUpdate(data.id, user, (err, user) => {
-    if (err) res.send({status: `error: ${err}`});
-    // console.log(`Updated user data: ${user}`);
-    res.send({status: 'ok'});
-  });
+    DB.editUser(req.body).then(
+        done => res.send({status: 'ok', msg: done}),
+        error => res.send({status: `error: ${error}`})
+    );
 });
 
-// add new user (form)
+// add new user (form) +
 router.get('/users/add', (req, res) => {
-  const data = {
-    title: "New User"
-  };
-  res.render('./users/userAdd', data);
-});
-
-// create new user (ajax)
-router.post('/users', (req, res) => {
-  const newUser = new User(req.body);
-  newUser.save((err) => {
-    if (!err) {
-      // console.log(`User ${newUser} saved successfully!`);
+    if (req.query.format === 'json') {
+        res.send(data);
     } else {
-      res.send({status: `error: ${err}`});
+        res.render('./users/userAdd', {title: "New User"});
     }
-  });
-  res.send({status: 'ok'});
 });
 
-// user by id (table)
+// add new user (ajax) +
+router.post('/users', (req, res) => {
+    DB.addUser(req.body).then(
+        done => res.send({status: 'ok', msg: done}),
+        error => res.send({status: `error: ${error}`})
+    );
+});
+
+// get user by id (table) +
 router.get('/users/:id', (req, res) => {
-  const id = req.params.id;
-  User.find({_id: id}, (err, user) => {
-    if (err) res.send({status: `error: ${err}`});
-    const data = {
-      title: `${user.firstName} ${user.lastName}`,
-      user: user[0]
-    };
-    res.render('./users/user', data);
-  });
+    DB.getUserByID(req.params.id).then(
+        user => {
+            const data = {
+                title: `${user.firstName} ${user.lastName}`,
+                user: user
+            };
+            if (req.query.format === 'json') {
+                res.send(data);
+            } else {
+                res.render('./users/user', data);
+            }
+        },
+        error => res.send({status: `error: ${error}`})
+    );
 });
 
-// all users (table)
+// get all users (table) +
 router.get('/users', (req, res) => {
-    User.find({}, (err, users) => {
-    if (err) res.send({status: `error: ${err}`});
-    const data = {
-      title: "Users",
-      users: users
-    };
-    res.render('./users/users', data);
-  });
+    DB.getAllUsers.then(
+        users => {
+            const data = {
+                title: "Users",
+                users: users
+            };
+            if (req.query.format === 'json') {
+                res.send(data);
+            } else {
+                res.render('./users/users', data);
+            }
+        },
+        error => res.send({status: `error: ${error}`})
+    );
 });
 
 // force redirect to avoid confusion at this stage, since home page is missing...
 router.get('/', (req, res) => {
-  res.redirect('/users');
+    res.redirect('/users');
 });
 
 /*-------------------------------
-  Sync routes to work w/o AJAX
+ Sync routes to work w/o AJAX
  ------------------------------*/
-/*
-// create new user (sync)
+/**/
+// add user (sync)
 router.post('/users/add', (req, res) => {
-  db.addNewUser(req.body);
-  res.redirect('/users');
+    DB.addUser(req.body).then(
+        done => res.redirect('/users'),
+        error => res.send(error)
+    );
 });
 
-// update user info (sync)
+// edit (sync)
 router.post('/users/:id/edit', (req, res) => {
-  db.updateUser(req.body);
-  res.redirect('/users');
+    DB.editUser(req.body).then(
+        done => res.redirect('/users'),
+        error => res.send(error)
+    );
 });
 
 // delete user (sync)
 router.get('/users/:id/delete', (req, res) => {
-  db.deleteUser(+req.params.id);
-  res.redirect('/users');
+    DB.deleteUser(req.params.id).then(
+        done => res.redirect('/users'),
+        error => res.send(error)
+    );
 });
-*/
 
 module.exports = router;
