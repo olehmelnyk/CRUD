@@ -17,12 +17,12 @@ const getAllUsers = () => {
 };
 
 const getUserByID = id => {
-  return new Promise((resolve, reject) => {
-      getAllUsers().then(
-          users => resolve(users.find(user => user.id == id)),
-          error => reject(error)
-      );
-  });
+    return new Promise((resolve, reject) => {
+        getAllUsers().then(
+            users => resolve(users.find(user => user.id == id)),
+            error => reject(error)
+        );
+    });
 };
 
 // TODO: find better algorithm to generate UID,
@@ -33,7 +33,7 @@ const addUser = data => {
         getAllUsers().then(
             users => {
                 users.push({
-                    id: users.slice(-1)[0].id +1,
+                    id: users.slice(-1)[0].id + 1,
                     firstName: data.firstName,
                     lastName: data.lastName
                 });
@@ -48,8 +48,8 @@ const editUser = data => {
     return new Promise((resolve, reject) => {
         getAllUsers().then(
             users => {
-                for(let i = 0; i < users.length; i++){
-                    if(users[i].id === +data.id){
+                for (let i = 0; i < users.length; i++) {
+                    if (users[i].id === +data.id) {
                         users[i].firstName = data.firstName;
                         users[i].lastName = data.lastName;
                         break;
@@ -66,8 +66,8 @@ const deleteUser = id => {
     return new Promise((resolve, reject) => {
         getAllUsers().then(
             users => {
-                for(let i = 0; i < users.length; i++){
-                    if(users[i].id === +id){
+                for (let i = 0; i < users.length; i++) {
+                    if (users[i].id === +id) {
                         var deletedUser = users.pop();
                         break;
                     }

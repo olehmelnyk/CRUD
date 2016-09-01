@@ -20,7 +20,7 @@ const DB = require('../controllers/dbDriver').DB;
  delete    /users/:id        delete user by id (confirm, then send delete request via AJAX and redirect to /users)
  */
 
-// delete user (ajax) +
+// delete user (ajax)
 router.delete('/users/:id', (req, res) => {
     DB.deleteUser(req.params.id).then(
         done => res.send({status: 'ok', msg: done}),
@@ -28,7 +28,7 @@ router.delete('/users/:id', (req, res) => {
     );
 });
 
-// edit user (form) +
+// edit user (form)
 router.get('/users/:id/edit', (req, res) => {
     DB.getUserByID(req.params.id).then(
         user => {
@@ -46,7 +46,7 @@ router.get('/users/:id/edit', (req, res) => {
     );
 });
 
-// edit user (ajax) +
+// edit user (ajax)
 router.put('/users/:id', (req, res) => {
     DB.editUser(req.body).then(
         done => res.send({status: 'ok', msg: done}),
@@ -54,7 +54,7 @@ router.put('/users/:id', (req, res) => {
     );
 });
 
-// add new user (form) +
+// add new user (form)
 router.get('/users/add', (req, res) => {
     if (req.query.format === 'json') {
         res.send(data);
@@ -63,7 +63,7 @@ router.get('/users/add', (req, res) => {
     }
 });
 
-// add new user (ajax) +
+// add new user (ajax)
 router.post('/users', (req, res) => {
     DB.addUser(req.body).then(
         done => res.send({status: 'ok', msg: done}),
@@ -71,7 +71,7 @@ router.post('/users', (req, res) => {
     );
 });
 
-// get user by id (table) +
+// get user by id (table)
 router.get('/users/:id', (req, res) => {
     DB.getUserByID(req.params.id).then(
         user => {
@@ -89,7 +89,7 @@ router.get('/users/:id', (req, res) => {
     );
 });
 
-// get all users (table) +
+// get all users (table)
 router.get('/users', (req, res) => {
     DB.getAllUsers().then(
         users => {
@@ -115,7 +115,7 @@ router.get('/', (req, res) => {
 /*-------------------------------
  Sync routes to work w/o AJAX
  ------------------------------*/
-/**/
+
 // add user (sync)
 router.post('/users/add', (req, res) => {
     DB.addUser(req.body).then(

@@ -11,9 +11,9 @@ addUser.on('submit', e => {
         method: 'POST',
         data: getFormData(addUser),
         success: (data) => {
-            if(data.status === 'ok'){
+            if (data.status === 'ok') {
                 window.location = '/users';
-            }else{
+            } else {
                 alert('Error')
             }
         }
@@ -28,9 +28,9 @@ updateUser.on('submit', e => {
         method: 'PUT',
         data: data,
         success: (data) => {
-            if(data.status === 'ok'){
+            if (data.status === 'ok') {
                 window.location = '/users';
-            }else{
+            } else {
                 alert('Error')
             }
         }
@@ -41,15 +41,15 @@ deleteUser.each((i, delBtn) => {
     delBtn.addEventListener('click', e => {
         e.preventDefault();
         let uid = delBtn.getAttribute('data-uid');
-        if(confirm('Are you sure you want to delete this user?')){
+        if (confirm('Are you sure you want to delete this user?')) {
             $.ajax({
                 url: `/users/${uid}`,
                 method: 'DELETE',
                 data: uid,
                 success: (data) => {
-                    if(data.status === 'ok'){
+                    if (data.status === 'ok') {
                         window.location = '/users';
-                    }else{
+                    } else {
                         alert('Error')
                     }
                 }

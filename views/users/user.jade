@@ -1,23 +1,23 @@
 extends ../layout
 
 block content
-  ol.breadcrumb
-    li
-      a(href="/") Home
-    li
-      a(href="/users") Users
-    li.active= user.firstName+" "+user.lastName
+    ol.breadcrumb
+        li
+            a(href="/") Home
+        li
+            a(href="/users") Users
+        li.active= user.firstName + " " + user.lastName
 
-  table.table.table-hover
-    tr
-      th First Name
-      th Last Name
-      th Edit
-      th Delete
-    tr
-      td= user.firstName
-      td= user.lastName
-      td
-        a.btn.btn-primary.glyphicon.glyphicon-pencil(href="/users/"+user.id+"/edit" title="Edit User")
-      td
-        a.deleteUser.btn.btn-danger.glyphicon.glyphicon-trash(href="/users/"+user.id+"/delete" data-uid=user.id title="Delete User")
+    table.table.table-hover
+        tr
+            th First Name
+            th Last Name
+            th Edit
+            th Delete
+        tr
+            td= user.firstName
+            td= user.lastName
+            td
+                a.btn.btn-primary.glyphicon.glyphicon-pencil(href="/users/" + user.id + "/edit" title="Edit User")
+            td
+                a.deleteUser.btn.btn-danger.glyphicon.glyphicon-trash(href="/users/" + user.id + "/delete" data-uid=user.id title="Delete User")

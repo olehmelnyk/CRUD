@@ -30,37 +30,37 @@ server.on('listening', onListening);
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error){
-  if(error.syscall !== 'listen'){
-    throw error;
-  }
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
 
-  let bind = typeof config.port === 'string'
-    ? `Pipe ${config.port}`
-    : `Port ${config.port}`;
+    let bind = typeof config.port === 'string'
+        ? `Pipe ${config.port}`
+        : `Port ${config.port}`;
 
-  // handle specific listen errors with friendly messages
-  switch(error.code){
-    case 'EACCES':
-      console.error(`${bind} requires elevated privileges`);
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(`${bind} is already in use`);
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(`${bind} requires elevated privileges`);
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(`${bind} is already in use`);
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
 }
 
 /**
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening(){
-  //const addr = server.address();
-  //let bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  let msg = `Listening on ${config.host}:${config.port}`;
-  process.env.DEBUG ? debug(msg) : console.log(msg);
+function onListening() {
+    //const addr = server.address();
+    //let bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+    let msg = `Listening on ${config.host}:${config.port}`;
+    process.env.DEBUG ? debug(msg) : console.log(msg);
 }

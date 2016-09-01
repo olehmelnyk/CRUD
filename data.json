@@ -1,10 +1,34 @@
 {
   "users": [
-    {"id": 0, "firstName": "James", "lastName": "Kirk"},
-    {"id": 1, "firstName": "Leonard", "lastName": "McCoy"},
-    {"id": 2, "firstName": "Montgomery", "lastName": "Scott"},
-    {"id": 3, "firstName": "Nyota", "lastName": "Uhura"},
-    {"id": 4, "firstName": "Hikaru", "lastName": "Sulu"},
-    {"id": 5, "firstName": "Pavel", "lastName": "Chekov"}
+    {
+      "id": 0,
+      "firstName": "James",
+      "lastName": "Kirk"
+    },
+    {
+      "id": 1,
+      "firstName": "Leonard",
+      "lastName": "McCoy"
+    },
+    {
+      "id": 2,
+      "firstName": "Montgomery",
+      "lastName": "Scott"
+    },
+    {
+      "id": 3,
+      "firstName": "Nyota",
+      "lastName": "Uhura"
+    },
+    {
+      "id": 4,
+      "firstName": "Hikaru",
+      "lastName": "Sulu"
+    },
+    {
+      "id": 5,
+      "firstName": "Pavel",
+      "lastName": "Chekov"
+    }
   ]
 }
