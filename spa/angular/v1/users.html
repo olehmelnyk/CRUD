@@ -1,0 +1,31 @@
+<nav class="breadcrumbs grey lighten-4">
+    <a href="/" class="breadcrumb blue-text text-darken-2">Home</a>
+    <span class="breadcrumb">Users</span>
+</nav>
+
+<div ng-show="users[0]">
+    <table class="bordered highlight centered responsive-table">
+        <tr>
+            <th class="center-align">First Name</th>
+            <th class="center-align">Last Name</th>
+            <th class="center-align">Show</th>
+            <th class="center-align">Edit</th>
+            <th class="center-align">Delete</th>
+        </tr>
+        <tr ng-repeat="user in users">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td><a href="./#/users/{{user._id || user.id}}" ng-click="showUser(user._id || user.id)" title="Show User"><i class="material-icons blue-text">visibility</i></a></td>
+            <td><a href="./#/users/{{user._id || user.id}}/edit" ng-click="editUser(user._id || user.id)" title="Edit User"><i class="material-icons blue-text">create</i></a></td>
+            <td><a ng-click="deleteUser(user._id || user.id)" title="Delete User"><i class="material-icons blue-text">delete_forever</i></a></td>
+        </tr>
+    </table>
+</div>
+
+<h5 ng-hide="users[0]" class="center-align"><a href="./#/users/add">Add some users to show them here!</a></h5>
+
+<div class="fixed-action-btn">
+    <a href="./#/users/add" class="btn-floating btn-large blue waves-effect">
+        <i class="large material-icons">person_add</i>
+    </a>
+</div>

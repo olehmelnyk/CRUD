@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="CRUD" ng-controller="MainCtrl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="//crud.local:3001/angular/v1/">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="app.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="light-blue darken-4">
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo">CRUD App</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Contacts</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container" ng-view></main>
+    <footer class="page-footer light-blue darken-4">
+        <div class="footer-copyright light-blue darken-4">
+            <div class="container">© 2016 All rights reserved</div>
+        </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<nav class="breadcrumbs grey lighten-4">
+    <a href="/" class="breadcrumb blue-text text-darken-2">Home</a>
+    <a href="./#/users/" class="breadcrumb blue-text text-darken-2">Users</a>
+    <span class="breadcrumb">{{user.firstName}} {{user.lastName}}</span>
+</nav>
+<table class="bordered highlight centered responsive-table">
+    <tr>
+        <th class="center-align">First Name</th>
+        <th class="center-align">Last Name</th>
+        <th class="center-align">Edit</th>
+        <th class="center-align">Delete</th>
+    </tr>
+    <tr>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td><a href="./#/users/{{user._id || user.id}}/edit" ng-click="editUser(user._id || user.id)" title="Edit User"><i class="material-icons blue-text">create</i></a></td>
+        <td><a ng-click="deleteUser(user._id || user.id)" title="Delete User"><i class="material-icons blue-text">delete_forever</i></a></td>
+    </tr>
+</table>

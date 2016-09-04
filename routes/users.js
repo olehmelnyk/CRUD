@@ -37,7 +37,7 @@ router.get('/users/:id/edit', (req, res) => {
                 user: user
             };
             if (req.query.format === 'json') {
-                res.send(data);
+                res.json(data);
             } else {
                 res.render('./users/userEdit', data);
             }
@@ -57,7 +57,7 @@ router.put('/users/:id', (req, res) => {
 // add new user (form)
 router.get('/users/add', (req, res) => {
     if (req.query.format === 'json') {
-        res.send(data);
+        res.json(data);
     } else {
         res.render('./users/userAdd', {title: "New User"});
     }
@@ -80,7 +80,7 @@ router.get('/users/:id', (req, res) => {
                 user: user
             };
             if (req.query.format === 'json') {
-                res.send(data);
+                res.json(data);
             } else {
                 res.render('./users/user', data);
             }
@@ -98,7 +98,7 @@ router.get('/users', (req, res) => {
                 users: users
             };
             if (req.query.format === 'json') {
-                res.send(data);
+                res.json(data);
             } else {
                 res.render('./users/users', data);
             }

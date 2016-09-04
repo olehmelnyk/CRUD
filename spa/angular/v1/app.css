@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.breadcrumbs {
+    margin: 20px 0;
+    padding: 0 20px;
+    /*box-shadow: none;*/
+}
+
+.breadcrumb::before {
+    color: #1976d2;
+}
+
+.breadcrumb:last-child {
+    color: #64b5f6;
+}
+
+.fixed-action-btn {
+    bottom: 45px;
+    right: 24px;
+}
+
+input[type=text]:focus {
+    border-bottom-color: #01579b !important;
+    box-shadow: 0 1px 0 0 #01579b !important;
+}
+
+form .ng-invalid.ng-dirty {
+    border-bottom-color: red !important;
+    box-shadow: 0 1px 0 0 red !important;
+}
