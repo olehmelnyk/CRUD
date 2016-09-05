@@ -74,7 +74,7 @@ angular.module('CRUD', ['ngResource', 'ngRoute'])
 
         $scope.cancel = () => {
             window.history.back();
-        }
+        };
     })
 
     .controller('EditUserCtrl', function ($scope, $rootScope, $http, $routeParams, $location) {
@@ -103,7 +103,7 @@ angular.module('CRUD', ['ngResource', 'ngRoute'])
 
         $scope.cancel = () => {
             window.history.back();
-        }
+        };
     })
 
     .controller('MainCtrl', function ($scope, $rootScope, $http, $location) {

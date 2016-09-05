@@ -14,7 +14,7 @@ addUser.on('submit', e => {
             if (data.status === 'ok') {
                 window.location = '/users';
             } else {
-                alert('Error')
+                alert('Error');
             }
         }
     });
@@ -31,7 +31,7 @@ updateUser.on('submit', e => {
             if (data.status === 'ok') {
                 window.location = '/users';
             } else {
-                alert('Error')
+                alert('Error');
             }
         }
     });
@@ -50,7 +50,7 @@ deleteUser.each((i, delBtn) => {
                     if (data.status === 'ok') {
                         window.location = '/users';
                     } else {
-                        alert('Error')
+                        alert('Error');
                     }
                 }
             });

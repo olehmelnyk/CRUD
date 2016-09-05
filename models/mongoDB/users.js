@@ -19,9 +19,7 @@ const User = mongoose.model('User', userSchema);
 const getAllUsers = () => {
     return new Promise((resolve, reject) => {
         User.find((error, data) => {
-            error
-                ? reject(error)
-                : resolve(data);
+            error ? reject(error) : resolve(data);
         });
     });
 };
@@ -29,9 +27,7 @@ const getAllUsers = () => {
 const getUserByID = id => {
     return new Promise((resolve, reject) => {
         User.find({_id: id}, (error, data) => {
-            error
-                ? reject(error)
-                : resolve(data[0]);
+            error ? reject(error) : resolve(data[0]);
         });
     });
 };
@@ -39,9 +35,7 @@ const getUserByID = id => {
 const addUser = data => {
     return new Promise((resolve, reject) => {
         new User(data).save((error, data) => {
-            error
-                ? reject(error)
-                : resolve(data)
+            error ? reject(error) : resolve(data);
         });
     });
 };
@@ -49,9 +43,7 @@ const addUser = data => {
 const editUser = user => {
     return new Promise((resolve, reject) => {
         User.findByIdAndUpdate(user.id, user, (error, data) => {
-            error
-                ? reject(error)
-                : resolve(user)
+            error ? reject(error) : resolve(data);
         });
     });
 };
@@ -59,9 +51,7 @@ const editUser = user => {
 const deleteUser = id => {
     return new Promise((resolve, reject) => {
         User.findByIdAndRemove(id, (error, data) => {
-            error
-                ? reject(error)
-                : resolve(data)
+            error ? reject(error) : resolve(data);
         });
     });
 };

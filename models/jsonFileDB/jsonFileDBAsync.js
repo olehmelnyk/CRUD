@@ -40,8 +40,8 @@ const addUser = data => {
                 fs.writeFile(dbFile, JSON.stringify({users: users}), error => error ? reject(error) : resolve(users.slice(-1)[0]));
             },
             error => reject(error) // <- reject from getAllUsers
-        )
-    })
+        );
+    });
 };
 
 const editUser = data => {
@@ -58,8 +58,8 @@ const editUser = data => {
                 fs.writeFile(dbFile, JSON.stringify({users: users}), error => error ? reject(error) : resolve(data));
             },
             error => reject(error) // <- reject from getAllUsers
-        )
-    })
+        );
+    });
 };
 
 const deleteUser = id => {
@@ -75,8 +75,8 @@ const deleteUser = id => {
                 fs.writeFile(dbFile, JSON.stringify({users: users}), error => error ? reject(error) : resolve(deletedUser));
             },
             error => reject(error) // <- reject from getAllUsers
-        )
-    })
+        );
+    });
 };
 
 exports.getAllUsers = getAllUsers;
